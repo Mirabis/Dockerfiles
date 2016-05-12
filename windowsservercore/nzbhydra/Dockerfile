@@ -12,26 +12,26 @@ ENV PYTHON_VER=2.7.x NZBHYDRA_BASE_VER=0.0.1a90
 RUN powershell.exe -Command \
 	Install-Package -Name python2 -Force ; \
 	$ErrorActionPreference = 'Stop'; \
-	Invoke-WebRequest -Method Get -Uri https://github.com/theotherp/nzbhydra/archive/$NZBHYDRA_BASE_VER.zip -OutFile c:\nzbhydra.zip ; \
-	Expand-Archive -Path c:\nzbhydra.zip -DestinationPath c:\ ; \
+	Invoke-WebRequest -Method Get -Uri https://github.com/theotherp/nzbhydra/archive/$env:NZBHYDRA_BASE_VER.zip -OutFile c:\nzbhydra.zip ; \
+	Expand-Archive -Path c:\nzbhydra.zip -DestinationPath 'C:\NZBHydra' ; \
 	Remove-Item c:\nzbhydra.zip -Force ; 
-#	New-Item -ItemType Directory -Path "%HOMEPATH%\Documents\NzbHydra\Logs\" ; \
-#	New-Item -ItemType Directory -Path "%HOMEPATH%\Documents\NzbHydra\Config\" ; \
-#	New-Item -ItemType Directory -Path "%HOMEPATH%\Documents\NzbHydra\Data\"  
+#	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Logs\" ; \
+#	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Config\" ; \
+#	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Data\"  
 	
-WORKDIR /NzbHydra
+WORKDIR /NZBHydra
 
 # Expose the default port
 EXPOSE 5075
 
 # Seperate mounting options for logs, config & data
-VOLUMES ["%HOMEPATH%\Documents\NzbHydra\Data","%HOMEPATH%\Documents\NzbHydra\Logs","%HOMEPATH%\Documents\NzbHydra\Config"]
+VOLUMES ["$env:HOMEPATH\Documents\NzbHydra\Data","$env:HOMEPATH\Documents\NzbHydra\Logs","$env:HOMEPATH\Documents\NzbHydra\Config"]
 
 # Allow customization
 CMD ["python","nzbhydra.py","--nobrowser",
-"--logfile","%HOMEPATH%\Documents\NzbHydra\Logs\nzbhydra.log",
-"--config","%HOMEPATH%\Documents\NzbHydra\Config\settings.cfg",
-"--database","%HOMEPATH%\Documents\NzbHydra\Data\nzbhydra.db",
+"--logfile","$env:HOMEPATH\Documents\NzbHydra\Logs\nzbhydra.log",
+"--config","$env:HOMEPATH\Documents\NzbHydra\Config\settings.cfg",
+"--database","$env:HOMEPATH\Documents\NzbHydra\Data\nzbhydra.db",
 ]
 
 
