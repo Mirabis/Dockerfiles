@@ -14,10 +14,10 @@ RUN powershell.exe -Command \
 	$ErrorActionPreference = 'Stop'; \
 	Invoke-WebRequest -Method Get -Uri https://github.com/theotherp/nzbhydra/archive/$env:NZBHYDRA_BASE_VER.zip -OutFile c:\nzbhydra.zip ; \
 	Expand-Archive -Path c:\nzbhydra.zip -DestinationPath 'C:\NZBHydra' ; \
-	Remove-Item c:\nzbhydra.zip -Force ; 
-#	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Logs\" ; \
-#	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Config\" ; \
-#	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Data\"  
+	Remove-Item c:\nzbhydra.zip -Force ; \
+	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Logs\" -Force \
+	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Config\" -Force \
+	New-Item -ItemType Directory -Path "$env:HOMEPATH\Documents\NzbHydra\Data\" -Force
 	
 WORKDIR /NZBHydra
 
