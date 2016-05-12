@@ -11,5 +11,7 @@ ENV CHOCO_VER=v2
 
 # Windows-like apt-get
 RUN powershell.exe -Command \
-	register-packagesource -Name chocolatey -Provider PSModule -Trusted -Location http://chocolatey.org/api/v2/
+	Get-PackageSource -Provider chocolatey -Force ; \
+	Set-PackageSource -Name chocolatey -Trusted 
+	
 	
