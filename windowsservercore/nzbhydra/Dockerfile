@@ -1,4 +1,4 @@
-FROM chocolate:windowsserver
+FROM mirabis/chocolate:windowsserver
 MAINTAINER Moreno Sint Hill (Mirabis) <info@mirabis.nl>
 LABEL Creator=Mirabis \
       docker.mirabis.is-beta=True \
