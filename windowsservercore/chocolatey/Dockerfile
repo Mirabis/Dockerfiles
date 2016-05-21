@@ -1,4 +1,4 @@
-FROM windowsservercore
+FROM windowsservercore:10.0.14300.1000
 
 MAINTAINER Moreno Sint Hill (Mirabis) <info@mirabis.nl>
 
@@ -10,8 +10,6 @@ LABEL Creator=Mirabis \
 ENV CHOCO_VER=v2
 
 # Windows-like apt-get
-RUN powershell.exe -Command \
-	Get-PackageSource -Provider chocolatey -Force ; \
-	Set-PackageSource -Name chocolatey -Trusted 
+RUN @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 	
 	

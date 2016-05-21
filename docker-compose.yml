@@ -1,0 +1,17 @@
+version: '2'
+services:
+  redis:
+    build: .\windowsservercore\redis
+    ports:
+      - "6739:6739"
+    cpuset: '6'
+    mem_limit: 4G
+    volumes:
+      - G:\Docker\conf\redis.windows.conf:C:\ProgramData\chocolatey\lib\redis-64\redis.windows.conf
+    networks:
+      - back-tier  
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
